@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # My Animated Portfolio
 
 A full-stack portfolio website with beautiful animations and a backend API.
@@ -134,3 +135,35 @@ MIT
 ## Contact
 
 Customize the contact section in the footer with your social links and email.
+=======
+# Frontend Portfolio
+
+Animated portfolio website built with React, Vite, and Framer Motion.
+
+## Features
+- Beautiful animations with Framer Motion
+- Responsive design with Tailwind CSS
+- Fast development with Vite
+- Multiple sections: Hero, About, Projects, Contact
+
+## Installation
+
+```bash
+cd frontend
+npm install
+```
+
+## Development
+
+```bash
+npm run dev
+```
+
+Visit `http://localhost:3000`
+
+## Build
+
+```bash
+npm run build
+```
+>>>>>>> 21a3431d0fbae437ff72e346a0874207bf714dd8

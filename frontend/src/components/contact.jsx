@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion'
 import { FadeInUp } from './animations'
+import { useForm, ValidationError } from '@formspree/react'
 
 export const Contact = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // Handle form submission
+  const [state, handleSubmit] = useForm("xdalejzd");
+  if (state.succeeded) {
+     return <p>Thanks for joining!</p>;
   }
 
   return (
@@ -25,12 +26,12 @@ export const Contact = () => {
         </FadeInUp>
 
         <motion.form
+          onSubmit={handleSubmit}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          onSubmit={handleSubmit}
-          className="space-y-6 bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 backdrop-blur-xl rounded-2xl p-8 shadow-2xl"
+          className="space-y-6 bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50"
         >
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -40,10 +41,12 @@ export const Contact = () => {
             <label className="block text-sm font-semibold mb-2 text-slate-300">Name</label>
             <motion.input
               type="text"
+              name="name"
+              id="name"
               required
               whileFocus={{ scale: 1.01, boxShadow: '0 0 20px rgba(59, 130, 246, 0.3)' }}
               className="w-full px-4 py-3 bg-slate-700/30 rounded-lg border border-slate-600 focus:border-accent focus:outline-none transition text-slate-100 placeholder-slate-500"
-              placeholder="Your name"
+              placeholder="Your full name"
             />
           </motion.div>
 
@@ -55,6 +58,8 @@ export const Contact = () => {
             <label className="block text-sm font-semibold mb-2 text-slate-300">Email</label>
             <motion.input
               type="email"
+              name="email"
+              id="email"
               required
               whileFocus={{ scale: 1.01, boxShadow: '0 0 20px rgba(59, 130, 246, 0.3)' }}
               className="w-full px-4 py-3 bg-slate-700/30 rounded-lg border border-slate-600 focus:border-accent focus:outline-none transition text-slate-100 placeholder-slate-500"
@@ -69,15 +74,19 @@ export const Contact = () => {
           >
             <label className="block text-sm font-semibold mb-2 text-slate-300">Message</label>
             <motion.textarea
+              name="message"
+              id="message"
               required
               rows="5"
               whileFocus={{ scale: 1.01, boxShadow: '0 0 20px rgba(59, 130, 246, 0.3)' }}
               className="w-full px-4 py-3 bg-slate-700/30 rounded-lg border border-slate-600 focus:border-accent focus:outline-none transition text-slate-100 placeholder-slate-500 resize-none"
-              placeholder="Your message..."
+              placeholder="write Your message here ..."
             />
           </motion.div>
 
           <motion.button
+            type="submit"
+            disabled={state.submitting}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.25 }}
@@ -87,6 +96,9 @@ export const Contact = () => {
           >
             Send Message
           </motion.button>
+          {state.succeeded && (
+            <p className='text-green-500 mt-4 text-center'>Message sent successfully</p>
+          )}
         </motion.form>
 
         <motion.div
@@ -96,7 +108,7 @@ export const Contact = () => {
           className="flex justify-center gap-8 mt-12 flex-wrap"
         >
           {[
-            { name: '📧 Email', url: 'https://mail.google.com/mail/?view=cm&fs=1&to=charithayaddanapalli3@gmail.com' },
+            { name: '📧 Email', url: 'mailto:charithayaddanapalli3@gmail.com' },
             { name: '💼 LinkedIn', url: 'https://linkedin.com/in/charitha-yaddanapalli' },
             { name: '🐙 GitHub', url: 'https://github.com/charithayaddanapalli3-ui' }
           ].map((social, idx) => (
@@ -117,5 +129,5 @@ export const Contact = () => {
         </motion.div>
       </div>
     </section>
-  )
-}
+  );
+};
